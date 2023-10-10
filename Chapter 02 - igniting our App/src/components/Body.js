@@ -1,6 +1,7 @@
 import RestaurantCard from "./RestaurantCard"
-import resList from "../utils/mockData"
+import Shimer from "./Shimer";
 import { useEffect, useState } from "react"
+import Shimer from "./Shimer";
 
 const Body = () => {
 
@@ -19,12 +20,16 @@ const Body = () => {
     setListOfRestaurants(json.data.cards[5].card.card.gridElements.infoWithStyle.restaurants);
   }
 
+if(listOfRestaurants.length === 0){
+  return <Shimer />
+}
+
   return (
     <div className="body-container">
       <div className="res-filter">
         <button className="filtred-btn" onClick={() => {
-          const filterData = resList.filter((res) => {
-            return res.info.avgRating > 4.2
+          const filterData = listOfRestaurants.filter((res) => {
+            return res.info.avgRating > 3.5
           })
           setListOfRestaurants(filterData)
           console.log(filterData);
