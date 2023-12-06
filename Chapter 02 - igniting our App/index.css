@@ -70,18 +70,7 @@ h4 {
     margin: 12px 0px;
 }
 
-.shimerContainer {
-    margin: 0 100px;
-    display: flex;
-    flex-wrap: wrap;
-}
 
-.shimerCard {
-    margin: 20px;
-    width: 200px;
-    height: 380px;
-    background-color: #f0f0f0;
-}
 
 .res-filter{
    display: flex;
@@ -95,3 +84,16 @@ h4 {
     padding: 10px;
     border: 1px solid black;
 } */
+
+.shimerContainer {
+    margin: 0 100px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.shimerCard {
+    margin: 20px;
+    width: 200px;
+    height: 380px;
+    background-color: #f0f0f0;
+}

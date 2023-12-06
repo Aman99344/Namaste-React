@@ -12,6 +12,7 @@ const Body = () => {
 
   const [searchText, setSearchText] = useState("");
 
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -27,53 +28,58 @@ const Body = () => {
     setFilterRestaurants(json.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
   };
 
+
   const onlineStatus = useOnlineStatus()
 
   if (onlineStatus === false)
     return (
       <h1>NO Internet Connection!</h1>
     )
-  return listOfRestaurants.length === 0 ? <Shimer /> : (
 
-    <div className="body-container">
+  return !listOfRestaurants || listOfRestaurants.length === 0 ? <Shimer /> : (
+
+    <div>
       <div className="res-filter">
-        <div className="searchContainer">
-          <input
+        <div className="flex justify-center items-center mt-6 mb-4">
+          <input className="border-2 border-black mr-10 rounded-lg"
             type="text"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
-          <button onClick={() => {
+          <button className="px-5 py-1.5 rounded-lg bg-green-100" onClick={() => {
             const filterRes = listOfRestaurants.filter((res) => {
               return res.info.name.toLowerCase().includes(searchText.toLowerCase())
             })
-            setFilterRestaurants(filterRes)
+            setFilterRestaurants(filterRes) 
 
-          }}>Seach</button>
+          }}>Search</button>
+
+          <button className="filtred-btn border-2 border-green-200 ml-10 px-4 py-1.4 rounded-lg"
+            onClick={() => {
+              const filterData = listOfRestaurants.filter((res) => {
+                return res.info.avgRating > 4.2;
+              });
+              setFilterRestaurants(filterData);
+            }}
+          >
+            Top Rated Restaurant
+          </button>
 
         </div>
 
-        <button
-          className="filtred-btn"
-          onClick={() => {
-            const filterData = listOfRestaurants.filter((res) => {
-              return res.info.avgRating > 4.2;
-            });
-            setFilterRestaurants(filterData);
-          }}
-        >
-          Top Rated Restaurant
-        </button>
+
       </div>
-      <div className="resContainer">
+      <div className="flex flex-wrap justify-center">
         {filteredRestaurants.map((restorant) => {
-          return <Link key={restorant.info.id} to={"restaurent/" + restorant.info.id}> <RestaurantCard resData={restorant} /> </Link>;
+           return <Link key={restorant.info.id} to={"restaurent/" + restorant.info.id}> <RestaurantCard resData={restorant} /> </Link>;
         })}
       </div>
     </div>
   );
 };
+
+
 
 export default Body;
