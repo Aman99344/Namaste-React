@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import Shimer from "./Shimer";
 import { useEffect, useState } from "react";
 import Shimer from "./Shimer";
@@ -11,6 +11,8 @@ const Body = () => {
   const [filteredRestaurants, setFilterRestaurants] = useState([])
 
   const [searchText, setSearchText] = useState("");
+
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard)
 
 
   useEffect(() => {
@@ -28,6 +30,8 @@ const Body = () => {
     setFilterRestaurants(json.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
   };
 
+  //! console.log(filteredRestaurants)
+  //! console.log(listOfRestaurants)
 
   const onlineStatus = useOnlineStatus()
 
@@ -52,7 +56,7 @@ const Body = () => {
             const filterRes = listOfRestaurants.filter((res) => {
               return res.info.name.toLowerCase().includes(searchText.toLowerCase())
             })
-            setFilterRestaurants(filterRes) 
+            setFilterRestaurants(filterRes)
 
           }}>Search</button>
 
@@ -73,7 +77,7 @@ const Body = () => {
       </div>
       <div className="flex flex-wrap justify-center">
         {filteredRestaurants.map((restorant) => {
-           return <Link key={restorant.info.id} to={"restaurent/" + restorant.info.id}> <RestaurantCard resData={restorant} /> </Link>;
+          return <Link key={restorant.info.id} to={"restaurent/" + restorant.info.id}> {restorant.info.promoted ? <RestaurantCardPromoted resData={restorant} /> : <RestaurantCard resData={restorant} />} </Link>;
         })}
       </div>
     </div>
