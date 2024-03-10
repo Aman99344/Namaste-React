@@ -15,9 +15,13 @@ const RestaurantMenu = () => {
 
   const { name, costForTwoMessage, avgRating } =
     resInfo?.cards[0]?.card?.card?.info;
-  // const { itemCards } = resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card
 
-  //! console.log(resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards)
+  //  const  itemCards  = resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card
+  //  console.log(itemCards);
+
+  //  console.log(resInfo);
+
+  //  console.log(resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards)
 
   const categories =
     resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(

@@ -1,7 +1,16 @@
+import { useDispatch } from "react-redux";
 import { CDN_URL } from "../utils/constant";
+import { addItem } from "../utils/cartSlice";
 
 const ItemList = ({ items }) => {
-  // console.log(items);
+
+  const Dispatch = useDispatch();
+
+  const handleAddItem = (item) =>{
+    //Dispatch an action
+     Dispatch(addItem(item))
+  }
+
   return (
     <div>
       {items.map((item) => {
@@ -26,9 +35,11 @@ const ItemList = ({ items }) => {
                 src={CDN_URL + item.card.info.imageId}
                 alt="food-img"
               />
-              <button className="m-[-20px] px-2 bg-green-200 font-semibold rounded-sm">
+
+               <button includeLable={true} onClick={() =>handleAddItem(item)} className="m-[-20px] px-2 bg-green-200 font-semibold rounded-sm">
                 ADD+
               </button>
+             
             </div>
           </div>
         );
